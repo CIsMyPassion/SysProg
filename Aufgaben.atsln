@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Ampel", "Ampel\Ampel.cproj", "{93E44338-2EAB-4870-90AC-614A70505ACB}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Taster_Abfrage", "Taster_Abfrage\Taster_Abfrage.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Taster_Interrupt", "Taster_Interrupt\Taster_Interrupt.cproj", "{F3389425-098A-4010-99F8-44D36B12CFC5}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Summer", "Summer\Summer.cproj", "{0FA7BE17-D56C-46A1-8E1B-103461B59D38}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Led_Frequenzen", "Led_Frequenzen\Led_Frequenzen.cproj", "{844C4AEE-FA43-46EB-88A8-8FF823B8ADA5}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Led_Dimmer", "Led_Dimmer\Led_Dimmer.cproj", "{5ED6A55D-8CCB-4AED-9366-93C69EA44C7F}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Doppel_Analog", "Double_Analog\Doppel_Analog.cproj", "{A05DD859-220C-4301-99E3-96C998141CE8}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Lauf_Led", "Lauf_Led\Lauf_Led.cproj", "{5A400EC9-672E-4FD3-8651-1E348E8C7007}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93E44338-2EAB-4870-90AC-614A70505ACB}.Debug|AVR.ActiveCfg = Debug|AVR
+		{93E44338-2EAB-4870-90AC-614A70505ACB}.Debug|AVR.Build.0 = Debug|AVR
+		{93E44338-2EAB-4870-90AC-614A70505ACB}.Release|AVR.ActiveCfg = Release|AVR
+		{93E44338-2EAB-4870-90AC-614A70505ACB}.Release|AVR.Build.0 = Release|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.ActiveCfg = Debug|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.Build.0 = Debug|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.ActiveCfg = Release|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.Build.0 = Release|AVR
+		{F3389425-098A-4010-99F8-44D36B12CFC5}.Debug|AVR.ActiveCfg = Debug|AVR
+		{F3389425-098A-4010-99F8-44D36B12CFC5}.Debug|AVR.Build.0 = Debug|AVR
+		{F3389425-098A-4010-99F8-44D36B12CFC5}.Release|AVR.ActiveCfg = Release|AVR
+		{F3389425-098A-4010-99F8-44D36B12CFC5}.Release|AVR.Build.0 = Release|AVR
+		{0FA7BE17-D56C-46A1-8E1B-103461B59D38}.Debug|AVR.ActiveCfg = Debug|AVR
+		{0FA7BE17-D56C-46A1-8E1B-103461B59D38}.Debug|AVR.Build.0 = Debug|AVR
+		{0FA7BE17-D56C-46A1-8E1B-103461B59D38}.Release|AVR.ActiveCfg = Release|AVR
+		{0FA7BE17-D56C-46A1-8E1B-103461B59D38}.Release|AVR.Build.0 = Release|AVR
+		{844C4AEE-FA43-46EB-88A8-8FF823B8ADA5}.Debug|AVR.ActiveCfg = Debug|AVR
+		{844C4AEE-FA43-46EB-88A8-8FF823B8ADA5}.Debug|AVR.Build.0 = Debug|AVR
+		{844C4AEE-FA43-46EB-88A8-8FF823B8ADA5}.Release|AVR.ActiveCfg = Release|AVR
+		{844C4AEE-FA43-46EB-88A8-8FF823B8ADA5}.Release|AVR.Build.0 = Release|AVR
+		{5ED6A55D-8CCB-4AED-9366-93C69EA44C7F}.Debug|AVR.ActiveCfg = Debug|AVR
+		{5ED6A55D-8CCB-4AED-9366-93C69EA44C7F}.Debug|AVR.Build.0 = Debug|AVR
+		{5ED6A55D-8CCB-4AED-9366-93C69EA44C7F}.Release|AVR.ActiveCfg = Release|AVR
+		{5ED6A55D-8CCB-4AED-9366-93C69EA44C7F}.Release|AVR.Build.0 = Release|AVR
+		{A05DD859-220C-4301-99E3-96C998141CE8}.Debug|AVR.ActiveCfg = Debug|AVR
+		{A05DD859-220C-4301-99E3-96C998141CE8}.Debug|AVR.Build.0 = Debug|AVR
+		{A05DD859-220C-4301-99E3-96C998141CE8}.Release|AVR.ActiveCfg = Release|AVR
+		{A05DD859-220C-4301-99E3-96C998141CE8}.Release|AVR.Build.0 = Release|AVR
+		{5A400EC9-672E-4FD3-8651-1E348E8C7007}.Debug|AVR.ActiveCfg = Debug|AVR
+		{5A400EC9-672E-4FD3-8651-1E348E8C7007}.Debug|AVR.Build.0 = Debug|AVR
+		{5A400EC9-672E-4FD3-8651-1E348E8C7007}.Release|AVR.ActiveCfg = Release|AVR
+		{5A400EC9-672E-4FD3-8651-1E348E8C7007}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
