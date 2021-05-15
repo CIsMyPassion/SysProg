@@ -32,25 +32,25 @@ inline void activate_pullups()
 	set_port(&PORTD, portd_byte);
 }
 
-void init()
+inline void init()
 {
 	configure_input_output();
 	activate_pullups();
 	
 	// activate led on start
-	set_bit_for_port(&OUTPUT_PORT, 1 << PORTB5);	
+	set_bit_for_port(&OUTPUT_PORT, LED);	
 }
 
-inline void pull_buttons()
+inline void poll_buttons()
 {
 	if (read_inverted_bit_from_port(&INPUT_PORT, ON_BUTTON))
 	{
-		set_bit_for_port(&OUTPUT_PORT, get_bitshifted_by(LED));
+		set_bit_for_port(&OUTPUT_PORT, LED);
 	}
 	
 	if(read_inverted_bit_from_port(&INPUT_PORT, OFF_BUTTON))
 	{
-		clear_bit_for_port(&OUTPUT_PORT, get_bitshifted_by(LED));
+		clear_bit_for_port(&OUTPUT_PORT, LED);
 	}
 }
 
@@ -60,7 +60,7 @@ int main(void)
 	
 	while (1)
 	{
-		//pull_buttons();
+		poll_buttons();
 	}
 }
 
