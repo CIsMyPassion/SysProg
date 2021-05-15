@@ -9,32 +9,49 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define SET_BIT(BYTE, BIT) BYTE |= (1 << BIT)
-#define CLEAR_BIT(BYTE, BIT) BYTE &= ~(1 << BIT)
-#define TOGGLE_BIT(BYTE, BIT) BYTE ^= (1 << BIT)
-#define TOGGLE_BYTE(BYTE) BYTE ^= 0xff;
-
-#define READ_BIT(BYTE, BIT) BYTE & (1 << BIT)
+#include "byte_operations.h"
+#include "port_operations.h"
 
 #define LED PORTB5
-#define OUTPUT PORTB
-
 #define ON_BUTTON PORTD2
 #define OFF_BUTTON PORTD3
-#define INPUT_OPTION PORTD
-#define INPUT PIND
+
+#define INPUT_PORT PIND
+#define OUTPUT_PORT PORTB
+
+inline void configure_input_output()
+{
+	uint8_t ddrb_byte = get_bitshifted_by(DDB5);
+	set_port(&DDRB, ddrb_byte);
+	clear_port(&DDRD);
+}
+
+inline void activate_pullups()
+{
+	uint8_t portd_byte = get_bitshifted_by(ON_BUTTON) | get_bitshifted_by(OFF_BUTTON);
+	set_port(&PORTD, portd_byte);
+}
 
 void init()
 {
-	SET_BIT(DDRB, DDB5);
+	configure_input_output();
+	activate_pullups();
 	
-	CLEAR_BIT(DDRD, DDD2);
-	CLEAR_BIT(DDRD, DDD3);
+	// activate led on start
+	set_bit_for_port(&OUTPUT_PORT, 1 << PORTB5);	
+}
+
+inline void pull_buttons()
+{
+	if (read_inverted_bit_from_port(&INPUT_PORT, ON_BUTTON))
+	{
+		set_bit_for_port(&OUTPUT_PORT, get_bitshifted_by(LED));
+	}
 	
-	CLEAR_BIT(OUTPUT, LED);
-	
-	SET_BIT(INPUT_OPTION, ON_BUTTON);
-	SET_BIT(INPUT_OPTION, OFF_BUTTON);
+	if(read_inverted_bit_from_port(&INPUT_PORT, OFF_BUTTON))
+	{
+		clear_bit_for_port(&OUTPUT_PORT, get_bitshifted_by(LED));
+	}
 }
 
 int main(void)
@@ -43,15 +60,7 @@ int main(void)
 	
 	while (1)
 	{
-		if (READ_BIT(INPUT, ON_BUTTON))
-		{
-			SET_BIT(OUTPUT, LED);
-		}
-		
-		if(READ_BIT(INPUT, OFF_BUTTON))
-		{
-			CLEAR_BIT(OUTPUT, LED);
-		}
+		//pull_buttons();
 	}
 }
 

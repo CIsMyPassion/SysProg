@@ -25,9 +25,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  10 .debug_str    0000042f  00000000  00000000  000015b4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000000f6  00000000  00000000  000019e3  2**0
+ 11 .debug_loc    000000f7  00000000  00000000  000019e3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000028  00000000  00000000  00001ad9  2**0
+ 12 .debug_ranges 00000028  00000000  00000000  00001ada  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -102,7 +102,7 @@ void init()
 inline void set_port(volatile uint8_t *port, uint8_t new_value)
 {
 	*port = new_value;
-  96:	8c e1       	ldi	r24, 0x1C	; 28
+  96:	8c e2       	ldi	r24, 0x2C	; 44
   98:	84 b9       	out	0x04, r24	; 4
 	*port &= ~(1 << bit_number);
 }
@@ -129,7 +129,7 @@ void delay_for_state()
   ac:	08 95       	ret
   ae:	8c 30       	cpi	r24, 0x0C	; 12
   b0:	61 f0       	breq	.+24     	; 0xca <delay_for_state+0x2c>
-  b2:	80 31       	cpi	r24, 0x10	; 16
+  b2:	80 32       	cpi	r24, 0x20	; 32
   b4:	99 f4       	brne	.+38     	; 0xdc <delay_for_state+0x3e>
 	#else
 		//round up by default
@@ -174,7 +174,7 @@ void set_new_state()
   ec:	08 95       	ret
   ee:	8c 30       	cpi	r24, 0x0C	; 12
   f0:	71 f0       	breq	.+28     	; 0x10e <set_new_state+0x30>
-  f2:	80 31       	cpi	r24, 0x10	; 16
+  f2:	80 32       	cpi	r24, 0x20	; 32
   f4:	79 f4       	brne	.+30     	; 0x114 <set_new_state+0x36>
 	{
 		case green:
@@ -197,7 +197,7 @@ void set_new_state()
  10c:	08 95       	ret
 		case red_yellow:
 			light_state = green;
- 10e:	80 e1       	ldi	r24, 0x10	; 16
+ 10e:	80 e2       	ldi	r24, 0x20	; 32
  110:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
  114:	08 95       	ret
 

@@ -1,7 +1,7 @@
 /*
- * ByteOperations.h
+ * byte_operations.h
  *
- * Created: 15/05/2021 14:19:30
+ * Created: 15/05/2021 15:28:59
  *  Author: sjno
  */ 
 
@@ -14,4 +14,4 @@ inline uint8_t get_bitshifted_by(uint8_t bitshift)
 	return 1 << bitshift;
 }
 
-#endif /* BYTEOPERATIONS_H_ */
+#endif /* BYTE_OPERATIONS_H_ */

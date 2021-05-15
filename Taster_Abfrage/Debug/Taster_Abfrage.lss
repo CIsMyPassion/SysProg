@@ -3,27 +3,29 @@ Taster_Abfrage.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  00000118  2**0
+  0 .data         00000000  00800100  00800100  000000ee  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000000c4  00000000  00000000  00000054  2**1
+  1 .text         0000009a  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  00000118  2**0
+  2 .comment      00000030  00000000  00000000  000000ee  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000148  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000120  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000028  00000000  00000000  00000188  2**0
+  4 .debug_aranges 00000028  00000000  00000000  00000160  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0000069b  00000000  00000000  000001b0  2**0
+  5 .debug_info   0000082a  00000000  00000000  00000188  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000619  00000000  00000000  0000084b  2**0
+  6 .debug_abbrev 000006b9  00000000  00000000  000009b2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000221  00000000  00000000  00000e64  2**0
+  7 .debug_line   00000229  00000000  00000000  0000106b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000034  00000000  00000000  00001088  2**2
+  8 .debug_frame  00000034  00000000  00000000  00001294  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000034a  00000000  00000000  000010bc  2**0
+  9 .debug_str    000003dc  00000000  00000000  000012c8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000018  00000000  00000000  00001406  2**0
+ 10 .debug_loc    00000092  00000000  00000000  000016a4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000018  00000000  00000000  00001736  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -63,79 +65,58 @@ Disassembly of section .text:
   6e:	d8 e0       	ldi	r29, 0x08	; 8
   70:	de bf       	out	0x3e, r29	; 62
   72:	cd bf       	out	0x3d, r28	; 61
-  74:	0e 94 53 00 	call	0xa6	; 0xa6 <main>
-  78:	0c 94 60 00 	jmp	0xc0	; 0xc0 <_exit>
+  74:	0e 94 48 00 	call	0x90	; 0x90 <main>
+  78:	0c 94 4b 00 	jmp	0x96	; 0x96 <_exit>
 
 0000007c <__bad_interrupt>:
   7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000080 <init>:
-#define INPUT_OPTION PORTD
-#define INPUT PIND
+	*port |= (1 << bit_number);
+}
 
-void init()
+inline void set_port(volatile uint8_t *port, uint8_t new_value)
 {
-	SET_BIT(DDRB, DDB5);
-  80:	84 b1       	in	r24, 0x04	; 4
-  82:	80 62       	ori	r24, 0x20	; 32
-  84:	84 b9       	out	0x04, r24	; 4
-	
-	CLEAR_BIT(DDRD, DDD2);
-  86:	8a b1       	in	r24, 0x0a	; 10
-  88:	8b 7f       	andi	r24, 0xFB	; 251
-  8a:	8a b9       	out	0x0a, r24	; 10
-	CLEAR_BIT(DDRD, DDD3);
-  8c:	8a b1       	in	r24, 0x0a	; 10
-  8e:	87 7f       	andi	r24, 0xF7	; 247
-  90:	8a b9       	out	0x0a, r24	; 10
-	
-	CLEAR_BIT(OUTPUT, LED);
-  92:	85 b1       	in	r24, 0x05	; 5
-  94:	8f 7d       	andi	r24, 0xDF	; 223
-  96:	85 b9       	out	0x05, r24	; 5
-	
-	SET_BIT(INPUT_OPTION, ON_BUTTON);
-  98:	8b b1       	in	r24, 0x0b	; 11
-  9a:	84 60       	ori	r24, 0x04	; 4
-  9c:	8b b9       	out	0x0b, r24	; 11
-	SET_BIT(INPUT_OPTION, OFF_BUTTON);
-  9e:	8b b1       	in	r24, 0x0b	; 11
-  a0:	88 60       	ori	r24, 0x08	; 8
-  a2:	8b b9       	out	0x0b, r24	; 11
-  a4:	08 95       	ret
+	*port = new_value;
+  80:	80 e2       	ldi	r24, 0x20	; 32
+  82:	84 b9       	out	0x04, r24	; 4
+	*port &= ~(1 << bit_number);
+}
 
-000000a6 <main>:
+inline void clear_port(volatile uint8_t *port)
+{
+	*port = 0x00;
+  84:	1a b8       	out	0x0a, r1	; 10
+	*port |= (1 << bit_number);
+}
+
+inline void set_port(volatile uint8_t *port, uint8_t new_value)
+{
+	*port = new_value;
+  86:	8c e0       	ldi	r24, 0x0C	; 12
+  88:	8b b9       	out	0x0b, r24	; 11
+#ifndef PORT_OPERATIONS_H_
+#define PORT_OPERATIONS_H_
+
+inline void set_bit_for_port(volatile uint8_t *port, uint8_t bit_number)
+{
+	*port |= (1 << bit_number);
+  8a:	85 b1       	in	r24, 0x05	; 5
+  8c:	85 b9       	out	0x05, r24	; 5
+  8e:	08 95       	ret
+
+00000090 <main>:
+	}
 }
 
 int main(void)
 {
 	init();
-  a6:	0e 94 40 00 	call	0x80	; 0x80 <init>
-	
-	while (1)
-	{
-		if (READ_BIT(INPUT, ON_BUTTON))
-  aa:	4a 9b       	sbis	0x09, 2	; 9
-  ac:	03 c0       	rjmp	.+6      	; 0xb4 <main+0xe>
-		{
-			SET_BIT(OUTPUT, LED);
-  ae:	85 b1       	in	r24, 0x05	; 5
-  b0:	80 62       	ori	r24, 0x20	; 32
-  b2:	85 b9       	out	0x05, r24	; 5
-		}
-		
-		if(READ_BIT(INPUT, OFF_BUTTON))
-  b4:	4b 9b       	sbis	0x09, 3	; 9
-  b6:	f9 cf       	rjmp	.-14     	; 0xaa <main+0x4>
-		{
-			CLEAR_BIT(OUTPUT, LED);
-  b8:	85 b1       	in	r24, 0x05	; 5
-  ba:	8f 7d       	andi	r24, 0xDF	; 223
-  bc:	85 b9       	out	0x05, r24	; 5
-  be:	f5 cf       	rjmp	.-22     	; 0xaa <main+0x4>
+  90:	0e 94 40 00 	call	0x80	; 0x80 <init>
+  94:	ff cf       	rjmp	.-2      	; 0x94 <main+0x4>
 
-000000c0 <_exit>:
-  c0:	f8 94       	cli
+00000096 <_exit>:
+  96:	f8 94       	cli
 
-000000c2 <__stop_program>:
-  c2:	ff cf       	rjmp	.-2      	; 0xc2 <__stop_program>
+00000098 <__stop_program>:
+  98:	ff cf       	rjmp	.-2      	; 0x98 <__stop_program>
