@@ -120,7 +120,7 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="byte_operations.h">
+    <Compile Include="analog.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
