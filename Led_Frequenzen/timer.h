@@ -31,9 +31,9 @@ void timer_init(uint16_t prescaler, uint16_t frequency, Timer_Handler handler)
 	timer_handler = handler;
 	timer_set_ocrn(frequency);
 	
-	TCCR0A |= (1 << WGM01);
+	TCCR0A |= (1 << WGM01); // Set CTC mode
 	
-	switch (prescaler)
+	switch (prescaler) // Set CSxx bits according to the prescaler
 	{
 		case 8:
 			set_bit_for_port(&TCCR0B, (1 << CS01));
@@ -49,7 +49,7 @@ void timer_init(uint16_t prescaler, uint16_t frequency, Timer_Handler handler)
 			break;
 	}
 	
-	TIMSK0 |= (1 << OCIE0A);
+	TIMSK0 |= (1 << OCIE0A); // Set timer counter interrupt mask to enable interrupt from timer 0
 }
 
 ISR(TIMER0_COMPA_vect)
