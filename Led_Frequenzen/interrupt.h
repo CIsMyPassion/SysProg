@@ -33,12 +33,12 @@ void interrupt_init(Interrupt_Handler isr0, Interrupt_Handler isr1)
 
 ISR (INT0_vect)
 {
-	interrupt0_handler(); // Execute handler for 
+	interrupt0_handler(); // Execute handler for interrupt 0
 }
 
 ISR (INT1_vect)
 {
-	interrupt1_handler();
+	interrupt1_handler(); // Execute handler for interrupt 0
 }
 
 #endif /* INTERRUPT_H_ */
