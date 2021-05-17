@@ -9,7 +9,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#include "byte_operations.h"
 #include "port_operations.h"
 
 enum light_states {

@@ -1,12 +1,13 @@
 /*
- * timer_operations.h
+ * timer.h
  *
- * Created: 16.05.2021 12:07:58
- *  Author: Jannis Kruse
+ * Created: 17/05/2021 21:03:08
+ *  Author: sjno
  */ 
 
-#ifndef TIMER_OPERATIONS_H_
-#define TIMER_OPERATIONS_H_
+
+#ifndef TIMER_H_
+#define TIMER_H_
 
 #ifndef F_CPU
 #define F_CPU 16000000UL
@@ -128,4 +129,4 @@ ISR(TIMER1_COMPA_vect)
 	timer1_handler(); // Execute timer interrupt handler
 }
 
-#endif /* TIMER_OPERATIONS_H_ */
+#endif /* TIMER_H_ */

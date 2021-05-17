@@ -23,16 +23,15 @@
 
 const uint16_t slow = 264 * 2;
 const uint16_t fast = 440 * 2;
-const uint16_t prescale = 256;
 
 void slow_button_handler()
 {
-	timer_set_ocrn(slow);
+	timer0_set_ocrn_frequency(slow);
 }
 
 void fast_button_handler()
 {
-	timer_set_ocrn(fast);
+	timer0_set_ocrn_frequency(fast);
 }
 
 void switch_led_handler()
@@ -50,7 +49,7 @@ inline void init()
 {
 	configure_output();
 	
-	timer_init(prescale, fast, &switch_led_handler);
+	timer0_init(TIMER_PRESCALER_256, fast, &switch_led_handler);
 	interrupt_init(&slow_button_handler, &fast_button_handler);
 	
 	sei();

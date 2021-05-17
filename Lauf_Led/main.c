@@ -52,13 +52,11 @@ inline void init()
 	uint16_t time_in_seconds = 1;
 	uint8_t use_seconds = 1;
 	
-	configure_leds();
 	timer1_init(TIMER_PRESCALER_1024, time_in_seconds, use_seconds, &switch_to_next_led_handler);
+	configure_leds();
 	
 	sei();
 }
-
-uint8_t text[10];
 
 int main(void)
 {

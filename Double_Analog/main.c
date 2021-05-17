@@ -21,8 +21,8 @@ volatile uint16_t adc1_value;
 uint16_t adc0_printed_value;
 uint16_t adc1_printed_value;
 
-char adc0_string[7];
-char adc1_string[7];
+char adc0_string[7] = "0:";
+char adc1_string[7] = "1:";
 
 void analog_read_0(uint16_t adc_value)
 {
@@ -34,21 +34,11 @@ void analog_read_1(uint16_t adc_value)
 	adc1_value = adc_value;
 }
 
-inline void initialize_strings()
-{
-	*adc0_string = '0';
-	*(adc0_string + 1) = ':';
-	
-	*adc1_string = '1';
-	*(adc1_string + 1) = ':';
-}
-
 inline void setup()
 {
-	initialize_strings();
 	serial_set_baud_rate(BAUD_9600);
-	
 	serial_init();
+	
 	analog_init(&analog_read_0, &analog_read_1);
 	
 	sei();
