@@ -45,14 +45,14 @@ inline void initialize_strings()
 
 inline void setup()
 {
+	initialize_strings();
 	serial_set_baud_rate(BAUD_9600);
-	serial_init();
 	
-	analog_init(Analog_Res_10_Bit, &analog_read_0, &analog_read_1);
+	serial_init();
+	analog_init(&analog_read_0, &analog_read_1);
 	
 	sei();
 	
-	initialize_strings();
 }
 
 inline uint8_t check_and_correct_printed_values()

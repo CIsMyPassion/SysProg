@@ -13,27 +13,16 @@
 
 typedef void (* Analog_Read_Handler)(uint16_t);
 
-Analog_Read_Handler adc0_handler;
-Analog_Read_Handler adc1_handler;
+static Analog_Read_Handler adc0_handler;
+static Analog_Read_Handler adc1_handler;
 
-typedef enum
-{
-	Analog_Res_8_Bit,
-	Analog_Res_10_Bit
-} Analog_Resolution;
-
-void analog_init(Analog_Resolution resolution, Analog_Read_Handler adc0, Analog_Read_Handler adc1)
+void analog_init(Analog_Read_Handler adc0, Analog_Read_Handler adc1)
 {
 	adc0_handler = adc0; // Set the handler for the ADC0 channel
 	adc1_handler = adc1; // Set the handler for the ADC1 channel
 	
 	ADMUX = 0; // Set the starting ADC channel to 0
-	ADMUX |= (1 << REFS0); // Set the reference voltage to Avcc
-	
-	if (resolution == Analog_Res_8_Bit)
-	{
-		ADMUX |= (1 << ADLAR); // Right adjust for 8 bit resolution
-	}
+	ADMUX |= (1 << REFS0); // Set the reference voltage to AVcc
 	
 	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // 128 prescale for 16Mhz
 	

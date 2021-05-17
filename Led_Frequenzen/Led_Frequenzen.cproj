@@ -120,7 +120,7 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="byte_operations.h">
+    <Compile Include="interrupt.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
@@ -129,7 +129,7 @@
     <Compile Include="port_operations.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timer_operations.h">
+    <Compile Include="timer.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

@@ -1,29 +1,28 @@
 /*
  * interrupt.h
  *
- * Created: 15/05/2021 16:19:50
+ * Created: 17/05/2021 15:06:27
  *  Author: sjno
  */ 
 
 
 #ifndef INTERRUPT_H_
 #define INTERRUPT_H_
+#include "port_operations.h"
 
 #include <avr/interrupt.h>
-
-#include "port_operations.h"
 
 typedef void (* Interrupt_Handler)();
 
 Interrupt_Handler interrupt0_handler;
 Interrupt_Handler interrupt1_handler;
 
-typedef struct 
+typedef struct
 {
 	
 } Interrupt_Config;
 
-void init_interrupt(Interrupt_Handler isr0, Interrupt_Handler isr1)
+void interrupt_init(Interrupt_Handler isr0, Interrupt_Handler isr1)
 {
 	uint8_t eicra_byte = (1 << ISC01)  | (1 << ISC11);
 	uint8_t eimsk_byte = (1 << INT0)   | (1 << INT1);

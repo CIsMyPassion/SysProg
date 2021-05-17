@@ -23,9 +23,9 @@ void init()
 {
 	light_state = red_yellow;
 	
-	uint8_t ddrb_byte = get_bitshifted_by(DDB2)
-			| get_bitshifted_by(DDB3)
-			| get_bitshifted_by(DDB4);
+	uint8_t ddrb_byte = (1 << DDB2)
+			| (1 << DDB3)
+			| (1 << DDB4);
 	
 	set_port(&DDRB, ddrb_byte);
 	clear_port(&PORTB);
