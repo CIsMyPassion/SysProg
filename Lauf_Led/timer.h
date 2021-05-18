@@ -24,11 +24,11 @@ static Timer_Handler timer1_handler;
 
 typedef enum
 {
-	TIMER_PRESCALER_0 = 0,
-	TIMER_PRESCALER_8 = 8,
-	TIMER_PRESCALER_64 = 64,
-	TIMER_PRESCALER_256 = 256,
-	TIMER_PRESCALER_1024 = 1024
+	TIMER_PRESCALER_0 = 1,
+	TIMER_PRESCALER_8 = 3,
+	TIMER_PRESCALER_64 = 6,
+	TIMER_PRESCALER_256 = 8,
+	TIMER_PRESCALER_1024 = 10
 } Timer_Prescaler;
 
 static Timer_Prescaler timer0_prescaler;
@@ -36,17 +36,17 @@ static Timer_Prescaler timer1_prescaler;
 
 void timer0_set_ocrn_frequency(uint16_t frequency)
 {
-	OCR0A = (((uint32_t) F_CPU / (uint16_t) timer0_prescaler) / frequency) - 1;
+	OCR0A = (((uint32_t) F_CPU >> timer0_prescaler) / frequency) - 1;
 }
 
 void timer1_set_ocrn_frequency(uint16_t frequency)
 {
-	OCR1A = (((uint32_t)F_CPU / (uint16_t) timer1_prescaler) / frequency) - 1;
+	OCR1A = (((uint32_t)F_CPU >> timer1_prescaler) / frequency) - 1;
 }
 
 void timer1_set_ocrn_seconds(uint16_t seconds)
 {
-	OCR1A = (((uint32_t)F_CPU / (uint16_t) timer1_prescaler) * seconds) - 1;
+	OCR1A = (((uint32_t)F_CPU >> timer1_prescaler) * seconds) - 1;
 }
 
 void timer0_init(Timer_Prescaler prescaler, uint16_t frequency, Timer_Handler handler)

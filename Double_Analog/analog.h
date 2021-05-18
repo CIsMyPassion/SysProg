@@ -47,7 +47,7 @@ ISR(ADC_vect)
 			break;
 		case 1:
 			adc1_handler(adc_value); // Pass the ADC value to the handler function
-			ADMUX &= 0xF8; //clear the last 4 bits to reset to ADC0
+			ADMUX &= 0xF0; //clear the last 4 bits to reset to ADC0
 			break;
 	}
 	
